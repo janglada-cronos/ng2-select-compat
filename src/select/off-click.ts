@@ -1,9 +1,11 @@
 import { Directive, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
 
+/* tslint:disable-next-line */
+const MouseEvent = (global as any).MouseEvent as MouseEvent;
+
 @Directive({
   selector: '[offClick]'
 })
-
 export class OffClickDirective implements OnInit, OnDestroy {
   /* tslint:disable */
   @Input('offClick') public offClickHandler: any;
