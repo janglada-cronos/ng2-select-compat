@@ -155,7 +155,7 @@ let styles = `
         <li *ngFor="let o of options" role="menuitem">
           <div class="ui-select-choices-row"
                [class.active]="isActive(o)"
-               (mouseenter)="selectActive(o)"
+               (mouseenter)="selectActive(o, $event)"
                (click)="selectMatch(o, $event)">
             <a href="javascript:void(0)" class="dropdown-item">
               <div [innerHtml]="sanitize(o.text | highlight:inputValue)"></div>
@@ -173,7 +173,7 @@ let styles = `
           <div *ngFor="let o of c.children"
                class="ui-select-choices-row"
                [class.active]="isActive(o)"
-               (mouseenter)="selectActive(o)"
+               (mouseenter)="selectActive(o, $event)"
                (click)="selectMatch(o, $event)"
                [ngClass]="{'active': isActive(o)}">
             <a href="javascript:void(0)" class="dropdown-item">
@@ -222,7 +222,7 @@ let styles = `
         <li *ngFor="let o of options" role="menuitem">
           <div class="ui-select-choices-row"
                [class.active]="isActive(o)"
-               (mouseenter)="selectActive(o)"
+               (mouseenter)="selectActive(o, $event)"
                (click)="selectMatch(o, $event)">
             <a href="javascript:void(0)" class="dropdown-item">
               <div [innerHtml]="sanitize(o.text | highlight:inputValue)"></div>
@@ -240,7 +240,7 @@ let styles = `
           <div *ngFor="let o of c.children"
                class="ui-select-choices-row"
                [class.active]="isActive(o)"
-               (mouseenter)="selectActive(o)"
+               (mouseenter)="selectActive(o, $event)"
                (click)="selectMatch(o, $event)"
                [ngClass]="{'active': isActive(o)}">
             <a href="javascript:void(0)" class="dropdown-item">
@@ -516,11 +516,14 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.inputEvent(event);
   }
 
-  protected  selectActive(value:SelectItem):void {
+  protected selectActive(value:SelectItem, e:any):void {
     this.activeOption = value;
+    if(e.fromElement && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) {
+      this.selectMatch(value, e);
+    }
   }
 
-  protected  isActive(value:SelectItem):boolean {
+  protected isActive(value:SelectItem):boolean {
     return this.activeOption.id === value.id;
   }
 

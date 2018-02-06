@@ -35,7 +35,7 @@
     <li *ngFor="let o of options" role="menuitem">
       <div class="ui-select-choices-row"
            [class.active]="isActive(o)"
-           (mouseenter)="selectActive(o)"
+           (mouseenter)="selectActive(o, $event)"
            (click)="selectMatch(o, $event)">
         <a href="javascript:void(0)" class="dropdown-item">
           <div [innerHtml]="sanitize(o.text | highlight:inputValue)"></div>
@@ -53,7 +53,7 @@
       <div *ngFor="let o of c.children"
            class="ui-select-choices-row"
            [class.active]="isActive(o)"
-           (mouseenter)="selectActive(o)"
+           (mouseenter)="selectActive(o, $event)"
            (click)="selectMatch(o, $event)"
            [ngClass]="{'active': isActive(o)}">
         <a href="javascript:void(0)" class="dropdown-item">
@@ -102,7 +102,7 @@
     <li *ngFor="let o of options" role="menuitem">
       <div class="ui-select-choices-row"
            [class.active]="isActive(o)"
-           (mouseenter)="selectActive(o)"
+           (mouseenter)="selectActive(o, $event)"
            (click)="selectMatch(o, $event)">
         <a href="javascript:void(0)" class="dropdown-item">
           <div [innerHtml]="sanitize(o.text | highlight:inputValue)"></div>
@@ -120,7 +120,7 @@
       <div *ngFor="let o of c.children"
            class="ui-select-choices-row"
            [class.active]="isActive(o)"
-           (mouseenter)="selectActive(o)"
+           (mouseenter)="selectActive(o, $event)"
            (click)="selectMatch(o, $event)"
            [ngClass]="{'active': isActive(o)}">
         <a href="javascript:void(0)" class="dropdown-item">
